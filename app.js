@@ -1,5 +1,4 @@
-// ⚠️ Cole aqui a URL do seu App da Web do Apps Script
-const API_URL = 'https://script.google.com/macros/s/SEU_ID_AQUI/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbyaQ1ZEtGFO_XgI1wprpnnQ6PLObn1irw40CaCAnYUu4Q66V4-4iWxC4bUQjyVRIpiW/exec';
 
 let projetos = [];
 let projetoAtual = null;
