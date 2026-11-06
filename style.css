@@ -1,0 +1,40 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, sans-serif; background: #f1f5f9; color: #1e293b; }
+header { display: flex; align-items: center; gap: 12px; padding: 14px 20px;
+  background: #1e3a8a; color: #fff; position: sticky; top: 0; z-index: 10; }
+header h1 { flex: 1; font-size: 1.3rem; }
+header button { background: rgba(255,255,255,.15); color: #fff; border: 0;
+  padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 1rem; }
+main { max-width: 1000px; margin: 20px auto; padding: 0 16px; }
+.hidden { display: none !important; }
+#loading { text-align: center; padding: 30px; }
+
+.card { background: #fff; padding: 16px; border-radius: 12px; margin-bottom: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08); cursor: pointer; transition: transform .15s; }
+.card:hover { transform: translateY(-2px); }
+.card h2 { font-size: 1.05rem; margin-bottom: 10px; display: flex; justify-content: space-between; }
+
+.bar { background: #e2e8f0; border-radius: 99px; height: 18px; overflow: hidden; }
+.bar > div { height: 100%; background: linear-gradient(90deg, #3b82f6, #2563eb);
+  transition: width .5s; }
+.bar.done > div { background: linear-gradient(90deg, #22c55e, #16a34a); }
+
+#totalProjeto { background: #fff; padding: 16px; border-radius: 12px; margin-bottom: 16px; }
+#totalProjeto strong { display: block; margin-bottom: 8px; }
+
+table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; }
+th, td { padding: 10px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+th { background: #334155; color: #fff; font-size: .9rem; }
+tr.item td { font-weight: 600; background: #f8fafc; }
+tr.sub td:nth-child(2) { padding-left: 28px; }
+tr.concluido td { background: #dcfce7 !important; color: #166534; }
+td input[type=number] { width: 70px; padding: 4px; border: 1px solid #cbd5e1; border-radius: 6px; }
+.pct-cell { display: flex; align-items: center; gap: 8px; }
+.pct-cell .bar { flex: 1; height: 10px; min-width: 60px; }
+
+#toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+  background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 8px; }
+
+@media (max-width: 600px) {
+  th:nth-child(3), td:nth-child(3) { display: none; }
+}

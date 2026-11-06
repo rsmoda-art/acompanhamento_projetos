@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1e3a8a">
+  <title>Acompanhamento de Projetos</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <button id="btnVoltar" class="hidden">← Voltar</button>
+    <h1 id="titulo">Projetos</h1>
+    <button id="btnAtualizar" title="Atualizar">⟳</button>
+  </header>
+
+  <main>
+    <div id="loading">Carregando...</div>
+    <section id="telaLista"></section>
+    <section id="telaProjeto" class="hidden">
+      <div id="totalProjeto"></div>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Descrição</th><th>Prazo (dias)</th><th>% Executada</th></tr>
+        </thead>
+        <tbody id="tabela"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <div id="toast" class="hidden"></div>
+  <script src="app.js"></script>
+</body>
+</html>
