@@ -8,25 +8,27 @@ const $ = id => document.getElementById(id);
 const isSub = id => id.includes('.');
 const parentId = id => id.split('.')[0];
 
-function calcular(rows) {
-  const itens = rows.filter(r => !isSub(r.id)).map(item => {
-    const subs = rows.filter(r => isSub(r.id) && parentId(r.id) === item.id);
-    if (subs.length) {
-      const prazo = subs.reduce((s, r) => s + r.prazo, 0);
-      const pct = prazo
-        ? subs.reduce((s, r) => s + r.pct * r.prazo, 0) / prazo
-        : subs.reduce((s, r) => s + r.pct, 0) / subs.length;
-      return { ...item, prazo, pct, subs, calculado: true };
+function calcularProgresso(rows) {
+  const pais = rows.filter(r => !String(r.id).includes('.'));
+
+  const resumo = pais.map(pai => {
+    const filhos = rows.filter(r => String(r.id).startsWith(pai.id + '.'));
+    if (!filhos.length) {
+      return { pct: Number(pai.pct) || 0, peso: Number(pai.prazo) || 0 };
     }
-    return { ...item, subs: [], calculado: false };
+    const somaPrazo = filhos.reduce((s, f) => s + (Number(f.prazo) || 0), 0);
+    const pct = somaPrazo > 0
+      ? filhos.reduce((s, f) => s + (Number(f.pct) || 0) * (Number(f.prazo) || 0), 0) / somaPrazo
+      : filhos.reduce((s, f) => s + (Number(f.pct) || 0), 0) / filhos.length;
+    return { pct, peso: somaPrazo || Number(pai.prazo) || 0 };
   });
-  const prazoTotal = itens.reduce((s, i) => s + i.prazo, 0);
-  const total = itens.length
-    ? (prazoTotal
-        ? itens.reduce((s, i) => s + i.pct * i.prazo, 0) / prazoTotal
-        : itens.reduce((s, i) => s + i.pct, 0) / itens.length)
-    : 0;
-  return { itens, total };
+
+  const somaPesos = resumo.reduce((s, r) => s + r.peso, 0);
+  const total = somaPesos > 0
+    ? resumo.reduce((s, r) => s + r.pct * r.peso, 0) / somaPesos
+    : resumo.reduce((s, r) => s + r.pct, 0) / (resumo.length || 1);
+
+  return { total, resumo };
 }
 
 const fmt = n => `${(Math.round(n * 10) / 10).toLocaleString('pt-BR')}%`;
