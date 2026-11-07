@@ -5,6 +5,7 @@ let projetoAtual = null;
 const $ = id => document.getElementById(id);
 
 // ---------- Cálculos ----------
+
 const isSub = id => id.includes('.');
 const parentId = id => id.split('.')[0];
 
